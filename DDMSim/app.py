@@ -5,8 +5,19 @@ from scipy import spatial
 import plotly.graph_objects as go
 
 ############
+### PATH ###
+############
+
+if platform.system() == 'Darwin':
+    main_path = Path(".")
+else:
+    main_path = Path("streamlit")
+
+############
 ### FIS ####
 ############
+
+FIS_path = main_path.joinpath('DDM_FIS.fld')
 
 def YMN_to_num(answer):
     if answer == 'Yes': result = 1
@@ -15,7 +26,7 @@ def YMN_to_num(answer):
     return result
 
 # READ FILE:
-df_FIS = pd.read_csv('DDM_FIS.fld', sep='\s', engine='python')
+df_FIS = pd.read_csv(FIS_path, sep='\s', engine='python')
 df_FIS_in = df_FIS.iloc[:, :-1]
 df_FIS_in = df_FIS_in.to_numpy()
 df_FIS_out = df_FIS.iloc[:, df_FIS.shape[1] - 1]

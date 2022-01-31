@@ -1,0 +1,107 @@
+Engine: DDM Sim
+InputVariable: Facts_Relevant
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: no Sigmoid 0.300 -40.000
+  term: maybe Bell 0.500 0.215 3.000
+  term: yes Sigmoid 0.700 40.000
+InputVariable: Facts_Credible
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: no Sigmoid 0.330 -40.000
+  term: maybe Bell 0.500 0.215 3.000
+  term: yes Sigmoid 0.680 40.000
+InputVariable: Facts_Sufficient
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: no Sigmoid 0.330 -40.000
+  term: maybe Bell 0.500 0.215 3.000
+  term: yes Sigmoid 0.680 40.000
+InputVariable: Decisions_Documented_Consistently
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: no Sigmoid 0.350 -40.000
+  term: maybe Bell 0.500 0.215 3.000
+  term: yes Sigmoid 0.660 40.000
+InputVariable: Conclusions_Reasonable_and_Rational
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: no Sigmoid 0.340 -40.000
+  term: maybe Bell 0.500 0.215 3.000
+  term: yes Sigmoid 0.670 40.000
+InputVariable: Applying_Policy_Correctly
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: no Sigmoid 0.330 -40.000
+  term: maybe Bell 0.500 0.215 3.000
+  term: yes Sigmoid 0.680 40.000
+InputVariable: Decision_Within_Limits
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: no Sigmoid 0.340 -40.000
+  term: maybe Bell 0.500 0.215 3.000
+  term: yes Sigmoid 0.660 40.000
+InputVariable: Level_of_Discretion
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: limited Sigmoid 0.500 -40.000
+  term: broad Sigmoid 0.500 40.000
+InputVariable: Processes_Fair_and_Impartial
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: no Sigmoid 0.300 -40.000
+  term: maybe Bell 0.500 0.215 3.000
+  term: yes Sigmoid 0.690 40.000
+OutputVariable: Defensible_Decision
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: EinsteinSum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: no Sigmoid 0.190 -40.000
+  term: maybe_not Bell 0.280 0.125 3.000
+  term: maybe Bell 0.500 0.125 3.000
+  term: maybe_yes Bell 0.730 0.125 3.000
+  term: yes Sigmoid 0.810 40.000
+RuleBlock: Darren & Grant + Juan's corrections
+  enabled: true
+  conjunction: EinsteinProduct
+  disjunction: EinsteinSum
+  implication: EinsteinProduct
+  activation: Proportional
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes then Defensible_Decision is maybe
+  rule: if Facts_Relevant is maybe and Facts_Credible is maybe and Facts_Sufficient is maybe then Defensible_Decision is no
+  rule: if Facts_Relevant is no and Facts_Credible is no and Facts_Sufficient is no then Defensible_Decision is no
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is yes and Decision_Within_Limits is yes then Defensible_Decision is yes
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is yes and Decisions_Documented_Consistently is yes and Decision_Within_Limits is no then Defensible_Decision is no
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Applying_Policy_Correctly is yes and Decision_Within_Limits is no then Defensible_Decision is no
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is yes and Decision_Within_Limits is yes and Processes_Fair_and_Impartial is maybe then Defensible_Decision is maybe
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no then Defensible_Decision is maybe
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is no then Defensible_Decision is maybe_not
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is maybe then Defensible_Decision is maybe
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is somewhat yes then Defensible_Decision is maybe_yes
+  rule: if Facts_Relevant is maybe and Facts_Credible is maybe and Facts_Sufficient is maybe and Level_of_Discretion is broad then Defensible_Decision is maybe_yes
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decision_Within_Limits is yes and Processes_Fair_and_Impartial is no then Defensible_Decision is no
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no then Defensible_Decision is maybe
+  rule: if Facts_Relevant is no and Facts_Credible is yes and Facts_Sufficient is yes then Defensible_Decision is no
+  rule: if Facts_Relevant is yes and Facts_Credible is no and Facts_Sufficient is yes then Defensible_Decision is no
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is no then Defensible_Decision is maybe
+  rule: if Facts_Relevant is yes and Facts_Credible is maybe and Facts_Sufficient is yes then Defensible_Decision is maybe_yes
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is no then Defensible_Decision is maybe_not
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is maybe then Defensible_Decision is maybe
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is somewhat yes then Defensible_Decision is maybe_yes
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is yes and Level_of_Discretion is broad then Defensible_Decision is yes
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no and Level_of_Discretion is broad then Defensible_Decision is maybe_not
+  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no and Level_of_Discretion is limited then Defensible_Decision is no
+  rule: if Processes_Fair_and_Impartial is no or Processes_Fair_and_Impartial is maybe then Defensible_Decision is no

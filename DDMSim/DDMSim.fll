@@ -1,4 +1,4 @@
-Engine: DDM Sim
+Engine: DDMSim
 InputVariable: Facts_Relevant
   enabled: true
   range: 0.000 1.000

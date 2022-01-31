@@ -5,21 +5,21 @@ from scipy import spatial
 import plotly.graph_objects as go
 from pathlib import Path
 import platform
-import os
 
 ############
 ### PATH ###
 ############
 
 if platform.system() == 'Darwin':
-    FIS_path = 'DDM_FIS.fld'
+    main_path = Path(".")
 else:
-    stdir = os.getcwd() # or provide path to \GroMoPo\streamlit\ folder
-    FIS_path = os.path.join(stdir,'DDM_FIS.fld')
+    main_path = Path("streamlit")
 
 ############
 ### FIS ####
 ############
+
+FIS_path = str(main_path.joinpath('DDM_FIS.fld'))
 
 def YMN_to_num(answer):
     if answer == 'Yes': result = 1

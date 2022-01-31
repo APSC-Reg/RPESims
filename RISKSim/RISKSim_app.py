@@ -14,19 +14,35 @@ if platform.system() == 'Darwin':
     main_path = Path(".")
     logo_path = Path(".")
 else:
-    main_path = Path("DDMSim")
-    logo_path = Path("DDMSim")
+    main_path = Path("RISKSim")
+    logo_path = Path("RISKSim")
 
 ############
 ### FIS ####
 ############
 
-FIS_path = str(main_path.joinpath('DDM_FIS.fld'))
+FIS_path = str(main_path.joinpath('RISK_FIS.fld'))
 
 def YMN_to_num(answer):
     if answer == 'Yes': result = 1
     if answer == 'Maybe': result = 0.5
     if answer == 'No': result = 0
+    return result
+
+def LIKELIHOOD_to_num(answer):
+    if answer == 'Rare': result = 0
+    if answer == 'Unlikely': result = 0.25
+    if answer == 'Possible': result = 0.5
+    if answer == 'Likely': result = 0.75
+    if answer == 'Probable': result = 1
+    return result
+
+def CONSEQUENCE_to_num(answer):
+    if answer == 'Negligible': result = 0
+    if answer == 'Minor': result = 0.25
+    if answer == 'Moderate': result = 0.5
+    if answer == 'Major': result = 0.75
+    if answer == 'Catastrophic': result = 1
     return result
 
 # READ FILE:
@@ -46,30 +62,26 @@ def fis(input_list):
     -------
     list
     '''
-    facts_relevant = input_list[0]
-    facts_credible = input_list[1]
-    facts_sufficient = input_list[2]
-    decisions_documented = input_list[3]
-    conclusions_reasonable = input_list[4]
-    applying_policy = input_list[5]
-    decision_within = input_list[6]
-    discretion_level = input_list[7]
-    processes_fair = input_list[8]
+    identified_risk = input_list[0]
+    industry_acceptance = input_list[1]
+    community_acceptance = input_list[2]
+    clear_understanding = input_list[3]
+    process_identify = input_list[4]
+    likelihood_rating = input_list[5]
+    consequence_rating = input_list[6]
     
     # INTERPOLATION - FIS
     result = []
     
     idx = tree_FIS.query(
         x = [
-            facts_relevant,
-            facts_credible,
-            facts_sufficient,
-            decisions_documented,
-            conclusions_reasonable,
-            applying_policy,
-            decision_within,
-            discretion_level,
-            processes_fair])[1]
+            identified_risk,
+            industry_acceptance,
+            community_acceptance,
+            clear_understanding,
+            process_identify,
+            likelihood_rating,
+            consequence_rating])[1]
     
     result = df_FIS_out.loc[idx]  
     
@@ -78,53 +90,49 @@ def fis(input_list):
 ###########
 
 if "df" not in st.session_state:
-    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Low","High","Threshold","DDMSim"]
+    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Low","High","Threshold","RISKSim"]
     st.session_state.df = pd.DataFrame(columns = column_names)
 
-apptitle = 'Defensible Decision Making Simulator'
+apptitle = 'Risk Management Simulator'
 
 st.set_page_config(page_title=apptitle, layout="wide", page_icon=":eyeglasses:")
 
-st.sidebar.image(str(logo_path.joinpath('DDMSim logo.png')))
-st.sidebar.markdown('This simulator is a learning tool that helps understand defensible decision making in regulatory systems. It should not be used or applied as a definitive decision making tool in the workplace.')
+st.sidebar.image(str(logo_path.joinpath('RISKSim logo.png')))
+st.sidebar.markdown('This simulator is a learning tool that helps understand risk management in regulatory systems. It should not be used or applied as a definitive risk management tool in the workplace.')
 
 st.sidebar.markdown('## User Inputs')
 
 if st.sidebar.button("Reset values", key=None, help="press this button to reset the trajectory table and trajectory plot", on_click=None):
-    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Low","High","Threshold","DDMSim"]
+    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Low","High","Threshold","RISKSim"]
     st.session_state.df = pd.DataFrame(columns = column_names)
 
 with st.sidebar.form(key ='Form1'):
     
     st.subheader("Case Study Context")
     
-    option_1 = st.selectbox('Q1: Are the facts relevant?',('Yes', 'Maybe', 'No'), key=1)
+    option_1 = st.selectbox('Q1: Have you identified the main risk you are trying to reduce, avoid or mitigate?',('Yes', 'Maybe', 'No'), key=1)
 
-    option_2 = st.selectbox('Q2: Are the facts credible?',('Yes', 'Maybe', 'No'), key=2)
+    option_2 = st.selectbox('Q2: Industry acceptance and support for the risk setting?',('Yes', 'Maybe', 'No'), key=2)
 
-    option_3 = st.selectbox('Q3: Are the facts sufficient?',('Yes', 'Maybe', 'No'), key=3)
+    option_3 = st.selectbox('Q3: Community acceptance and support for the risk setting?',('Yes', 'Maybe', 'No'), key=3)
 
-    option_4 = st.selectbox('Q4: Are the decisions leading to conclusions documented in a clear and consistent way?',('Yes', 'Maybe', 'No'), key=4)
+    option_4 = st.selectbox('Q4: Clear understanding of your agency risk appetite?',('Yes', 'Maybe', 'No'), key=4)
 
-    option_5 = st.selectbox('Q5: Are the conclusions drawn from the evidence reasonable and rational?',('Yes', 'Maybe', 'No'), key=5)
+    option_5 = st.selectbox('Q5: Process to identify risk rigorous, repeatable, verifiable?',('Yes', 'Maybe', 'No'), key=5)
 
-    option_6 = st.selectbox('Q6: Are you applying the policy correctly and with discretion?',('Yes', 'Maybe', 'No'), key=6)
+    option_6 = st.selectbox('Q6: Likelihood?',('Rare', 'Unlikely','Possible','Likely','Probable'), key=6)
 
-    option_7 = st.selectbox('Q7: Is the decision within limits of the source of power?',('Yes', 'Maybe', 'No'), key=7)
-
-    option_8 = st.selectbox('Q8: Does it give you discretion?',('Broad', 'Limited'), key=8)
-
-    option_9 = st.selectbox('Q9: Are the processes and procedures fair and impartial?',('Yes', 'Maybe', 'No'), key=9)
+    option_7 = st.selectbox('Q7: Consequence?',('Negligible','Minor','Moderate','Major','Catastrophic'), key=7)
         
     st.subheader("Your guess")
     
-    values = st.slider('How defensible do you think the decision is (select a range; this will displayed in grey within the gauge)?',0, 100, (25, 75))
+    values = st.slider('What level of risk management should be adopted (select a range; this will displayed in grey within the gauge)?',0, 100, (25, 75))
     
     value = np.random.randint(low=0, high=100)
     
     st.subheader("Your threshold")
     
-    threshold = st.slider('What would you accept as the minimum level of confidence (this will be displayed as a red line in the gauge)?',0, 100, 80)
+    threshold = st.slider('What would you accept as the minimum level of risk management (this will be displayed as a red line in the gauge)?',0, 100, 80)
     
     ### convert answers to float
     
@@ -133,23 +141,19 @@ with st.sidebar.form(key ='Form1'):
     option_3_num = YMN_to_num(option_3)
     option_4_num = YMN_to_num(option_4)
     option_5_num = YMN_to_num(option_5)
-    option_6_num = YMN_to_num(option_6)
-    option_7_num = YMN_to_num(option_7)
-    option_9_num = YMN_to_num(option_9)
-    
-    if option_8 == 'Broad': option_8_num = 1
-    if option_8 == 'Limited': option_8_num = 0
+    option_6_num = LIKELIHOOD_to_num(option_6)
+    option_7_num = CONSEQUENCE_to_num(option_7)
    
-    DDM_result = fis([option_1_num,option_2_num,option_3_num,option_4_num,option_5_num,option_6_num,option_7_num,option_8_num,option_9_num])
+    RISK_result = fis([option_1_num,option_2_num,option_3_num,option_4_num,option_5_num,option_6_num,option_7_num])
 
     if st.form_submit_button("Submit 👍🏼"):
         
-        to_append = [option_1,option_2,option_3,option_4,option_5,option_6,option_7,option_8,option_9,values[0],values[1],threshold,int(DDM_result*100)]
+        to_append = [option_1,option_2,option_3,option_4,option_5,option_6,option_7,values[0],values[1],threshold,int(RISK_result*100)]
         a_series = pd.Series(to_append, index = st.session_state.df.columns)
  
         st.session_state.df = st.session_state.df.append(a_series, ignore_index=True)
               
-st.sidebar.markdown('## About DDMSim')
+st.sidebar.markdown('## About RISKSim')
 
 with st.sidebar.expander("About"):
      st.write("""
@@ -163,7 +167,7 @@ def update_gauge():
         value = int(DDM_result*100),
         number = { 'suffix': '%' },
         mode = "gauge+number",
-        title = {'text': "Is this decision defensible?", 'font': {'size': 30}},
+        title = {'text': "What level of risk management should be adopted?", 'font': {'size': 30}},
         delta = {'reference': 0},
         gauge = {'axis': {'range': [None, 100]},
                  'steps' : [
@@ -210,7 +214,7 @@ with col2:
     
     fig.add_trace(go.Scatter(x=low_trace_x, y=low_trace_y, fill=None, mode='lines', line_color='orange', name='low guess'))
     fig.add_trace(go.Scatter(x=high_trace_x, y=high_trace_y, fill='tonexty', mode='lines', line_color='orange', name='high guess'))
-    fig.add_trace(go.Scatter(x=ddmsim_trace_x, y=ddmsim_trace_y, fill=None, mode='lines+markers', line_color='black', name='DDMSim'))
+    fig.add_trace(go.Scatter(x=ddmsim_trace_x, y=ddmsim_trace_y, fill=None, mode='lines+markers', line_color='black', name='RISKSim'))
     fig.add_trace(go.Scatter(x=threshold_trace_x, y=threshold_trace_y, fill=None, mode='lines', line_color='red', name='Threshold'))
 
 

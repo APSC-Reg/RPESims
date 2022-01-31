@@ -1,67 +1,58 @@
 Engine: DDM Sim
-InputVariable: Facts_Relevant
+InputVariable: identified_risk
   enabled: true
   range: 0.000 1.000
   lock-range: false
   term: no Sigmoid 0.300 -40.000
   term: maybe Bell 0.500 0.215 3.000
   term: yes Sigmoid 0.700 40.000
-InputVariable: Facts_Credible
+InputVariable: industry_acceptance
   enabled: true
   range: 0.000 1.000
   lock-range: false
   term: no Sigmoid 0.330 -40.000
   term: maybe Bell 0.500 0.215 3.000
   term: yes Sigmoid 0.680 40.000
-InputVariable: Facts_Sufficient
+InputVariable: community_acceptance
   enabled: true
   range: 0.000 1.000
   lock-range: false
   term: no Sigmoid 0.330 -40.000
   term: maybe Bell 0.500 0.215 3.000
   term: yes Sigmoid 0.680 40.000
-InputVariable: Decisions_Documented_Consistently
+InputVariable: clear_understanding
   enabled: true
   range: 0.000 1.000
   lock-range: false
   term: no Sigmoid 0.350 -40.000
   term: maybe Bell 0.500 0.215 3.000
   term: yes Sigmoid 0.660 40.000
-InputVariable: Conclusions_Reasonable_and_Rational
+InputVariable: process_identify
   enabled: true
   range: 0.000 1.000
   lock-range: false
   term: no Sigmoid 0.340 -40.000
   term: maybe Bell 0.500 0.215 3.000
   term: yes Sigmoid 0.670 40.000
-InputVariable: Applying_Policy_Correctly
+InputVariable: likelihood_rating
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: no Sigmoid 0.330 -40.000
-  term: maybe Bell 0.500 0.215 3.000
-  term: yes Sigmoid 0.680 40.000
-InputVariable: Decision_Within_Limits
+  term: rare Sigmoid 0.190 -40.000
+  term: unlikely Bell 0.290 0.125 3.000
+  term: possible Bell 0.500 0.115 3.000
+  term: likely Bell 0.730 0.125 3.000
+  term: probable Sigmoid 0.820 40.000
+InputVariable: consequence_rating
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: no Sigmoid 0.340 -40.000
-  term: maybe Bell 0.500 0.215 3.000
-  term: yes Sigmoid 0.660 40.000
-InputVariable: Level_of_Discretion
-  enabled: true
-  range: 0.000 1.000
-  lock-range: false
-  term: limited Sigmoid 0.500 -40.000
-  term: broad Sigmoid 0.500 40.000
-InputVariable: Processes_Fair_and_Impartial
-  enabled: true
-  range: 0.000 1.000
-  lock-range: false
-  term: no Sigmoid 0.300 -40.000
-  term: maybe Bell 0.500 0.215 3.000
-  term: yes Sigmoid 0.690 40.000
-OutputVariable: Defensible_Decision
+  term: negligible Sigmoid 0.170 -40.000
+  term: minor Bell 0.270 0.125 3.000
+  term: moderate Bell 0.500 0.125 3.000
+  term: major Bell 0.720 0.125 3.000
+  term: catastrophic Sigmoid 0.810 40.000
+OutputVariable: risk_management
   enabled: true
   range: 0.000 1.000
   lock-range: false
@@ -69,39 +60,61 @@ OutputVariable: Defensible_Decision
   defuzzifier: Centroid 100
   default: nan
   lock-previous: false
-  term: no Sigmoid 0.190 -40.000
-  term: maybe_not Bell 0.280 0.125 3.000
-  term: maybe Bell 0.500 0.125 3.000
-  term: maybe_yes Bell 0.730 0.125 3.000
-  term: yes Sigmoid 0.810 40.000
-RuleBlock: Darren & Grant + Juan's corrections
+  term: avoid Sigmoid 0.130 -40.000
+  term: remove Bell 0.200 0.105 3.000
+  term: reduce_like Bell 0.390 0.105 3.000
+  term: reduce_con Bell 0.580 0.105 3.000
+  term: share Bell 0.780 0.115 3.000
+  term: accept Sigmoid 0.860 40.000
+RuleBlock: Darren and Grant
   enabled: true
   conjunction: EinsteinProduct
   disjunction: EinsteinSum
   implication: EinsteinProduct
   activation: Proportional
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes then Defensible_Decision is maybe
-  rule: if Facts_Relevant is maybe and Facts_Credible is maybe and Facts_Sufficient is maybe then Defensible_Decision is no
-  rule: if Facts_Relevant is no and Facts_Credible is no and Facts_Sufficient is no then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is yes and Decision_Within_Limits is yes then Defensible_Decision is yes
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is yes and Decisions_Documented_Consistently is yes and Decision_Within_Limits is no then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Applying_Policy_Correctly is yes and Decision_Within_Limits is no then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is yes and Decision_Within_Limits is yes and Processes_Fair_and_Impartial is maybe then Defensible_Decision is maybe
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no then Defensible_Decision is maybe
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is no then Defensible_Decision is maybe_not
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is maybe then Defensible_Decision is maybe
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is somewhat yes then Defensible_Decision is maybe_yes
-  rule: if Facts_Relevant is maybe and Facts_Credible is maybe and Facts_Sufficient is maybe and Level_of_Discretion is broad then Defensible_Decision is maybe_yes
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decision_Within_Limits is yes and Processes_Fair_and_Impartial is no then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no then Defensible_Decision is maybe
-  rule: if Facts_Relevant is no and Facts_Credible is yes and Facts_Sufficient is yes then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is no and Facts_Sufficient is yes then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is no then Defensible_Decision is maybe
-  rule: if Facts_Relevant is yes and Facts_Credible is maybe and Facts_Sufficient is yes then Defensible_Decision is maybe_yes
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is no then Defensible_Decision is maybe_not
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is maybe then Defensible_Decision is maybe
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is somewhat yes then Defensible_Decision is maybe_yes
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is yes and Level_of_Discretion is broad then Defensible_Decision is yes
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no and Level_of_Discretion is broad then Defensible_Decision is maybe_not
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no and Level_of_Discretion is limited then Defensible_Decision is no
-  rule: if Processes_Fair_and_Impartial is no or Processes_Fair_and_Impartial is maybe then Defensible_Decision is no
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is rare and consequence_rating is negligible then risk_management is accept
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible and consequence_rating is minor then risk_management is accept
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible and consequence_rating is moderate then risk_management is share
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible and consequence_rating is major then risk_management is reduce_con
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible and consequence_rating is major then risk_management is remove
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible and consequence_rating is catastrophic then risk_management is remove
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is catastrophic then risk_management is avoid
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is rare and consequence_rating is catastrophic then risk_management is remove
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is catastrophic then risk_management is avoid
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible or likelihood_rating is unlikely and consequence_rating is major then risk_management is reduce_con
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is major then risk_management is reduce_like
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is unlikely and consequence_rating is moderate then risk_management is accept
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is moderate then risk_management is share
+  rule: if identified_risk is no and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes then risk_management is accept
+  rule: if identified_risk is no and consequence_rating is catastrophic then risk_management is accept
+  rule: if identified_risk is maybe and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes then risk_management is share
+  rule: if identified_risk is maybe and consequence_rating is catastrophic then risk_management is share
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is yes then risk_management is accept
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is yes then risk_management is share
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is yes then risk_management is reduce_con
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is yes then risk_management is reduce_like
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is no then risk_management is accept
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is no then risk_management is share
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is no then risk_management is reduce_con
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is no then risk_management is reduce_like
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no then risk_management is accept
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no then risk_management is share
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no then risk_management is reduce_con
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no then risk_management is reduce_like
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no and clear_understanding is yes then risk_management is share
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no and clear_understanding is yes then risk_management is reduce_con
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no and clear_understanding is yes then risk_management is reduce_like
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no and clear_understanding is maybe then risk_management is reduce_con
+  rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no and clear_understanding is no then risk_management is remove
+  rule: if identified_risk is yes and process_identify is yes then risk_management is accept
+  rule: if identified_risk is yes and process_identify is yes then risk_management is share
+  rule: if identified_risk is yes and process_identify is yes then risk_management is reduce_con
+  rule: if identified_risk is yes and process_identify is yes then risk_management is reduce_like
+  rule: if identified_risk is yes and process_identify is yes then risk_management is remove
+  rule: if identified_risk is yes and process_identify is yes then risk_management is avoid
+  rule: if identified_risk is yes and process_identify is no then risk_management is remove
+  rule: if identified_risk is yes and process_identify is no then risk_management is avoid
+  rule: if identified_risk is yes and process_identify is maybe then risk_management is reduce_con
+  rule: if identified_risk is yes and process_identify is maybe then risk_management is reduce_like
+  rule: if identified_risk is yes and process_identify is maybe then risk_management is remove
+  rule: if identified_risk is yes and process_identify is maybe then risk_management is avoid

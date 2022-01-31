@@ -164,7 +164,7 @@ def update_gauge():
 
     fig = go.Figure(go.Indicator(
         domain = {'x': [0, 1], 'y': [0, 1]},
-        value = int(DDM_result*100),
+        value = int(RISK_result*100),
         number = { 'suffix': '%' },
         mode = "gauge+number",
         title = {'text': "What level of risk management should be adopted?", 'font': {'size': 30}},
@@ -198,8 +198,8 @@ with col1:
 with col2:
     st.subheader("Trajectory plot")
     
-    ddmsim_trace_x = st.session_state.df.index.tolist()
-    ddmsim_trace_y = st.session_state.df.DDMSim.to_numpy()
+    risksim_trace_x = st.session_state.df.index.tolist()
+    risksim_trace_y = st.session_state.df.RISKSim.to_numpy()
 
     low_trace_x = st.session_state.df.index.tolist()
     low_trace_y = st.session_state.df.Low.to_numpy()
@@ -214,7 +214,7 @@ with col2:
     
     fig.add_trace(go.Scatter(x=low_trace_x, y=low_trace_y, fill=None, mode='lines', line_color='orange', name='low guess'))
     fig.add_trace(go.Scatter(x=high_trace_x, y=high_trace_y, fill='tonexty', mode='lines', line_color='orange', name='high guess'))
-    fig.add_trace(go.Scatter(x=ddmsim_trace_x, y=ddmsim_trace_y, fill=None, mode='lines+markers', line_color='black', name='RISKSim'))
+    fig.add_trace(go.Scatter(x=risksim_trace_x, y=risksim_trace_y, fill=None, mode='lines+markers', line_color='black', name='RISKSim'))
     fig.add_trace(go.Scatter(x=threshold_trace_x, y=threshold_trace_y, fill=None, mode='lines', line_color='red', name='Threshold'))
 
 

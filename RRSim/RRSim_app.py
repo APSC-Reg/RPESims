@@ -14,19 +14,51 @@ if platform.system() == 'Darwin':
     main_path = Path(".")
     logo_path = Path(".")
 else:
-    main_path = Path("DDMSim")
-    logo_path = Path("DDMSim")
+    main_path = Path("RRSim")
+    logo_path = Path("RRSim")
 
 ############
 ### FIS ####
 ############
 
-FIS_path = str(main_path.joinpath('DDM_FIS.fld'))
+FIS_path = str(main_path.joinpath('RR_FIS.fld'))
 
-def YMN_to_num(answer):
-    if answer == 'Yes': result = 1
-    if answer == 'Maybe': result = 0.5
-    if answer == 'No': result = 0
+def Q1_to_num(answer):
+    if answer == 'High': result = 1
+    if answer == 'Medium': result = 0.5
+    if answer == 'Low': result = 0
+    return result
+
+def Q2_to_num(answer):
+    if answer == 'Extreme': result = 1
+    if answer == 'Moderate': result = 0.5
+    if answer == 'Low': result = 0
+    return result
+
+def Q3_to_num(answer):
+    if answer == 'Deliberate': result = 1
+    if answer == 'Ignorant': result = 0.5
+    if answer == 'Accidental': result = 0
+    return result
+
+def Q4_to_num(answer):
+    if answer == 'Repeat': result = 1
+    if answer == 'First': result = 0
+    return result
+
+def Q5_to_num(answer):
+    if answer == 'Unable': result = 1
+    if answer == 'Able': result = 0
+    return result
+
+def Q6_to_num(answer):
+    if answer == 'Unwilling': result = 1
+    if answer == 'Willing': result = 0
+    return result
+
+def Q7_to_num(answer):
+    if answer == 'Reincidence': result = 1
+    if answer == 'First': result = 0
     return result
 
 # READ FILE:
@@ -46,30 +78,26 @@ def fis(input_list):
     -------
     list
     '''
-    facts_relevant = input_list[0]
-    facts_credible = input_list[1]
-    facts_sufficient = input_list[2]
-    decisions_documented = input_list[3]
-    conclusions_reasonable = input_list[4]
-    applying_policy = input_list[5]
-    decision_within = input_list[6]
-    discretion_level = input_list[7]
-    processes_fair = input_list[8]
+    legislative_guidance = input_list[0]
+    risk_assessment = input_list[1]
+    attitude_offence = input_list[2]
+    compliance_history = input_list[3]
+    ability_remedial = input_list[4]
+    attitude_following = input_list[5]
+    persistence_noncompliance = input_list[6]
     
     # INTERPOLATION - FIS
     result = []
     
     idx = tree_FIS.query(
         x = [
-            facts_relevant,
-            facts_credible,
-            facts_sufficient,
-            decisions_documented,
-            conclusions_reasonable,
-            applying_policy,
-            decision_within,
-            discretion_level,
-            processes_fair])[1]
+            legislative_guidance,
+            risk_assessment,
+            attitude_offence,
+            compliance_history,
+            ability_remedial,
+            attitude_following,
+            persistence_noncompliance])[1]
     
     result = df_FIS_out.loc[idx]  
     
@@ -78,78 +106,70 @@ def fis(input_list):
 ###########
 
 if "df" not in st.session_state:
-    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Low","High","Threshold","DDMSim"]
+    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Low","High","Threshold","RRSim"]
     st.session_state.df = pd.DataFrame(columns = column_names)
 
-apptitle = 'Defensible Decision Making Simulator'
+apptitle = 'Responsive Regulation Simulator'
 
 st.set_page_config(page_title=apptitle, layout="wide", page_icon=":eyeglasses:")
 
-st.sidebar.image(str(logo_path.joinpath('DDMSim logo.png')))
-st.sidebar.markdown('This simulator is a learning tool that helps understand defensible decision making in regulatory systems. It should not be used or applied as a definitive decision making tool in the workplace.')
+st.sidebar.image(str(logo_path.joinpath('RRSim logo.png')))
+st.sidebar.markdown('This simulator is a learning tool that helps understand responsive regulation in regulatory systems. It should not be used or applied as a definitive responsive regulation tool in the workplace.')
 
 st.sidebar.markdown('## User Inputs')
 
 if st.sidebar.button("Reset values", key=None, help="press this button to reset the trajectory table and trajectory plot", on_click=None):
-    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Low","High","Threshold","DDMSim"]
+    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Low","High","Threshold","RRSim"]
     st.session_state.df = pd.DataFrame(columns = column_names)
 
 with st.sidebar.form(key ='Form1'):
     
     st.subheader("Case Study Context")
     
-    option_1 = st.selectbox('Q1: Are the facts relevant?',('Yes', 'Maybe', 'No'), key=1)
+    option_1 = st.selectbox('Q1: What level of intervention does the policy allow for?',('High', 'Medium', 'Low'), key=1)
 
-    option_2 = st.selectbox('Q2: Are the facts credible?',('Yes', 'Maybe', 'No'), key=2)
+    option_2 = st.selectbox('Q2: What is the actual or potential risk assessment?',('Extreme', 'Moderate', 'Low'), key=2)
 
-    option_3 = st.selectbox('Q3: Are the facts sufficient?',('Yes', 'Maybe', 'No'), key=3)
+    option_3 = st.selectbox('Q3: What is the attitude leading to the offence?',('Deliberate', 'Ignorant', 'Accidental'), key=3)
 
-    option_4 = st.selectbox('Q4: Are the decisions leading to conclusions documented in a clear and consistent way?',('Yes', 'Maybe', 'No'), key=4)
+    option_4 = st.selectbox('Q4: What is the compliance history?',('Repeat', 'First'), key=4)
 
-    option_5 = st.selectbox('Q5: Are the conclusions drawn from the evidence reasonable and rational?',('Yes', 'Maybe', 'No'), key=5)
+    option_5 = st.selectbox('Q5: What is the ability to take remedial action?',('Unable', 'Able'), key=5)
 
-    option_6 = st.selectbox('Q6: Are you applying the policy correctly and with discretion?',('Yes', 'Maybe', 'No'), key=6)
+    option_6 = st.selectbox('Q6: What is the attitude during or following regulatory action?',('Unwilling', 'Willing'), key=6)
 
-    option_7 = st.selectbox('Q7: Is the decision within limits of the source of power?',('Yes', 'Maybe', 'No'), key=7)
-
-    option_8 = st.selectbox('Q8: Does it give you discretion?',('Broad', 'Limited'), key=8)
-
-    option_9 = st.selectbox('Q9: Are the processes and procedures fair and impartial?',('Yes', 'Maybe', 'No'), key=9)
+    option_7 = st.selectbox('Q7: Does non-compliance persist?',('Reincidence', 'First'), key=7)
         
     st.subheader("Your guess")
     
-    values = st.slider('How defensible do you think the decision is (select a range; this will displayed in grey within the gauge)?',0, 100, (25, 75))
+    values = st.slider('What compliance responses should be undertaken (select a range; this will displayed in grey within the gauge)?',0, 100, (25, 75))
     
     value = np.random.randint(low=0, high=100)
     
     st.subheader("Your threshold")
     
-    threshold = st.slider('What would you accept as the minimum level of confidence (this will be displayed as a red line in the gauge)?',0, 100, 80)
+    threshold = st.slider('What would you accept as the minimum level of response in this context (this will be displayed as a red line in the gauge)?',0, 100, 80)
     
     ### convert answers to float
     
-    option_1_num = YMN_to_num(option_1)
-    option_2_num = YMN_to_num(option_2)
-    option_3_num = YMN_to_num(option_3)
-    option_4_num = YMN_to_num(option_4)
-    option_5_num = YMN_to_num(option_5)
-    option_6_num = YMN_to_num(option_6)
-    option_7_num = YMN_to_num(option_7)
-    option_9_num = YMN_to_num(option_9)
-    
-    if option_8 == 'Broad': option_8_num = 1
-    if option_8 == 'Limited': option_8_num = 0
+    option_1_num = Q1_to_num(option_1)
+    option_2_num = Q2_to_num(option_2)
+    option_3_num = Q3_to_num(option_3)
+    option_4_num = Q4_to_num(option_4)
+    option_5_num = Q5_to_num(option_5)
+    option_6_num = Q6_to_num(option_6)
+    option_7_num = Q7_to_num(option_7)
    
-    DDM_result = fis([option_1_num,option_2_num,option_3_num,option_4_num,option_5_num,option_6_num,option_7_num,option_8_num,option_9_num])
+    RR_result = fis([option_1_num,option_2_num,option_3_num,option_4_num,option_5_num,option_6_num,option_7_num])
 
     if st.form_submit_button("Submit 👍🏼"):
         
-        to_append = [option_1,option_2,option_3,option_4,option_5,option_6,option_7,option_8,option_9,values[0],values[1],threshold,int(DDM_result*100)]
+        to_append = [option_1,option_2,option_3,option_4,option_5,option_6,option_7,values[0],values[1],threshold,int(RR_result*100)]
         a_series = pd.Series(to_append, index = st.session_state.df.columns)
  
         st.session_state.df = st.session_state.df.append(a_series, ignore_index=True)
               
-st.sidebar.markdown('## About DDMSim')
+st.sidebar.markdown('## About RESPONSim')
 
 with st.sidebar.expander("About"):
      st.write("""
@@ -160,10 +180,10 @@ def update_gauge():
 
     fig = go.Figure(go.Indicator(
         domain = {'x': [0, 1], 'y': [0, 1]},
-        value = int(DDM_result*100),
+        value = int(RR_result*100),
         number = { 'suffix': '%' },
         mode = "gauge+number",
-        title = {'text': "Is this decision defensible?", 'font': {'size': 30}},
+        title = {'text': "What compliance response should be adopted?", 'font': {'size': 30}},
         delta = {'reference': 0},
         gauge = {'axis': {'range': [None, 100]},
                  'steps' : [
@@ -173,6 +193,9 @@ def update_gauge():
                  'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': threshold}}))
 
     fig.update_layout(width=500, height=500)
+    fig.update_traces(gauge_axis_tickmode = 'array',
+                      gauge_axis_tickvals = [100/9*1, 100/9*2, 100/9*3, 100/9*4, 100/9*5, 100/9*6, 100/9*7, 100/9*8, 100/9*9],
+                      gauge_axis_ticktext = ['Awareness', 'Education', 'Counselling', 'Infringement', 'Undertakings', 'Direction','Order','Injunction','Prosecution'])
     st.plotly_chart(fig, use_container_width=True)        
         
 update_gauge()
@@ -194,8 +217,8 @@ with col1:
 with col2:
     st.subheader("Trajectory plot")
     
-    ddmsim_trace_x = st.session_state.df.index.tolist()
-    ddmsim_trace_y = st.session_state.df.DDMSim.to_numpy()
+    rrsim_trace_x = st.session_state.df.index.tolist()
+    rrsim_trace_y = st.session_state.df.RRSim.to_numpy()
 
     low_trace_x = st.session_state.df.index.tolist()
     low_trace_y = st.session_state.df.Low.to_numpy()
@@ -210,7 +233,7 @@ with col2:
     
     fig.add_trace(go.Scatter(x=low_trace_x, y=low_trace_y, fill=None, mode='lines', line_color='orange', name='low guess'))
     fig.add_trace(go.Scatter(x=high_trace_x, y=high_trace_y, fill='tonexty', mode='lines', line_color='orange', name='high guess'))
-    fig.add_trace(go.Scatter(x=ddmsim_trace_x, y=ddmsim_trace_y, fill=None, mode='lines+markers', line_color='black', name='DDMSim'))
+    fig.add_trace(go.Scatter(x=rrsim_trace_x, y=rrsim_trace_y, fill=None, mode='lines+markers', line_color='black', name='RRSim'))
     fig.add_trace(go.Scatter(x=threshold_trace_x, y=threshold_trace_y, fill=None, mode='lines', line_color='red', name='Threshold'))
 
 

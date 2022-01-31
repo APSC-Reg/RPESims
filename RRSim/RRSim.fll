@@ -1,67 +1,50 @@
-Engine: DDM Sim
-InputVariable: Facts_Relevant
+Engine: RISKSim
+InputVariable: legislative_guidance
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: no Sigmoid 0.300 -40.000
-  term: maybe Bell 0.500 0.215 3.000
-  term: yes Sigmoid 0.700 40.000
-InputVariable: Facts_Credible
+  term: low Sigmoid 0.300 -40.000
+  term: medium Bell 0.500 0.215 3.000
+  term: high Sigmoid 0.700 40.000
+InputVariable: risk_assessment
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: no Sigmoid 0.330 -40.000
-  term: maybe Bell 0.500 0.215 3.000
-  term: yes Sigmoid 0.680 40.000
-InputVariable: Facts_Sufficient
+  term: low Sigmoid 0.330 -40.000
+  term: moderate Bell 0.500 0.215 3.000
+  term: extreme Sigmoid 0.680 40.000
+InputVariable: attitude_offence
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: no Sigmoid 0.330 -40.000
-  term: maybe Bell 0.500 0.215 3.000
-  term: yes Sigmoid 0.680 40.000
-InputVariable: Decisions_Documented_Consistently
+  term: accidental Sigmoid 0.330 -40.000
+  term: ignorant Bell 0.500 0.215 3.000
+  term: deliberate Sigmoid 0.680 40.000
+InputVariable: compliance_history
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: no Sigmoid 0.350 -40.000
-  term: maybe Bell 0.500 0.215 3.000
-  term: yes Sigmoid 0.660 40.000
-InputVariable: Conclusions_Reasonable_and_Rational
+  term: first Sigmoid 0.520 -15.000
+  term: repeat Sigmoid 0.490 15.000
+InputVariable: ability_remedial
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: no Sigmoid 0.340 -40.000
-  term: maybe Bell 0.500 0.215 3.000
-  term: yes Sigmoid 0.670 40.000
-InputVariable: Applying_Policy_Correctly
+  term: able Sigmoid 0.520 -15.000
+  term: unable Sigmoid 0.510 15.000
+InputVariable: attitude_following
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: no Sigmoid 0.330 -40.000
-  term: maybe Bell 0.500 0.215 3.000
-  term: yes Sigmoid 0.680 40.000
-InputVariable: Decision_Within_Limits
+  term: willing Sigmoid 0.560 -15.000
+  term: unwilling Sigmoid 0.450 15.000
+InputVariable: persistence_noncompliance
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: no Sigmoid 0.340 -40.000
-  term: maybe Bell 0.500 0.215 3.000
-  term: yes Sigmoid 0.660 40.000
-InputVariable: Level_of_Discretion
-  enabled: true
-  range: 0.000 1.000
-  lock-range: false
-  term: limited Sigmoid 0.500 -40.000
-  term: broad Sigmoid 0.500 40.000
-InputVariable: Processes_Fair_and_Impartial
-  enabled: true
-  range: 0.000 1.000
-  lock-range: false
-  term: no Sigmoid 0.300 -40.000
-  term: maybe Bell 0.500 0.215 3.000
-  term: yes Sigmoid 0.690 40.000
-OutputVariable: Defensible_Decision
+  term: first Sigmoid 0.540 -15.000
+  term: reincidence Sigmoid 0.450 15.000
+OutputVariable: risk_management
   enabled: true
   range: 0.000 1.000
   lock-range: false
@@ -69,39 +52,42 @@ OutputVariable: Defensible_Decision
   defuzzifier: Centroid 100
   default: nan
   lock-previous: false
-  term: no Sigmoid 0.190 -40.000
-  term: maybe_not Bell 0.280 0.125 3.000
-  term: maybe Bell 0.500 0.125 3.000
-  term: maybe_yes Bell 0.730 0.125 3.000
-  term: yes Sigmoid 0.810 40.000
-RuleBlock: Darren & Grant + Juan's corrections
+  term: awareness Sigmoid 0.130 -40.000
+  term: educate Bell 0.100 0.085 3.000
+  term: counselling Bell 0.220 0.085 3.000
+  term: infringement Bell 0.340 0.085 3.000
+  term: undertakings Bell 0.470 0.095 3.000
+  term: direction Bell 0.600 0.095 3.000
+  term: order Bell 0.730 0.095 3.000
+  term: injunction Bell 0.860 0.095 3.000
+  term: prosecution Sigmoid 0.860 40.000
+RuleBlock: Workshop
   enabled: true
   conjunction: EinsteinProduct
   disjunction: EinsteinSum
   implication: EinsteinProduct
   activation: Proportional
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes then Defensible_Decision is maybe
-  rule: if Facts_Relevant is maybe and Facts_Credible is maybe and Facts_Sufficient is maybe then Defensible_Decision is no
-  rule: if Facts_Relevant is no and Facts_Credible is no and Facts_Sufficient is no then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is yes and Decision_Within_Limits is yes then Defensible_Decision is yes
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is yes and Decisions_Documented_Consistently is yes and Decision_Within_Limits is no then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Applying_Policy_Correctly is yes and Decision_Within_Limits is no then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is yes and Decision_Within_Limits is yes and Processes_Fair_and_Impartial is maybe then Defensible_Decision is maybe
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no then Defensible_Decision is maybe
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is no then Defensible_Decision is maybe_not
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is maybe then Defensible_Decision is maybe
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is somewhat yes then Defensible_Decision is maybe_yes
-  rule: if Facts_Relevant is maybe and Facts_Credible is maybe and Facts_Sufficient is maybe and Level_of_Discretion is broad then Defensible_Decision is maybe_yes
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decision_Within_Limits is yes and Processes_Fair_and_Impartial is no then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no then Defensible_Decision is maybe
-  rule: if Facts_Relevant is no and Facts_Credible is yes and Facts_Sufficient is yes then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is no and Facts_Sufficient is yes then Defensible_Decision is no
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is no then Defensible_Decision is maybe
-  rule: if Facts_Relevant is yes and Facts_Credible is maybe and Facts_Sufficient is yes then Defensible_Decision is maybe_yes
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is no then Defensible_Decision is maybe_not
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is maybe then Defensible_Decision is maybe
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Conclusions_Reasonable_and_Rational is somewhat yes then Defensible_Decision is maybe_yes
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is yes and Level_of_Discretion is broad then Defensible_Decision is yes
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no and Level_of_Discretion is broad then Defensible_Decision is maybe_not
-  rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no and Level_of_Discretion is limited then Defensible_Decision is no
-  rule: if Processes_Fair_and_Impartial is no or Processes_Fair_and_Impartial is maybe then Defensible_Decision is no
+  rule: if legislative_guidance is high and risk_assessment is moderate or risk_assessment is low and compliance_history is repeat and persistence_noncompliance is reincidence then risk_management is prosecution
+  rule: if legislative_guidance is high and risk_assessment is extreme and attitude_offence is deliberate and compliance_history is repeat or compliance_history is first then risk_management is prosecution
+  rule: if legislative_guidance is high and attitude_offence is deliberate and attitude_following is unwilling and persistence_noncompliance is reincidence then risk_management is prosecution
+  rule: if legislative_guidance is medium or legislative_guidance is high and risk_assessment is extreme and compliance_history is seldom repeat then risk_management is injunction
+  rule: if risk_assessment is extreme and ability_remedial is unable then risk_management is injunction
+  rule: if risk_assessment is extreme and attitude_offence is accidental then risk_management is undertakings
+  rule: if risk_assessment is moderate and attitude_offence is accidental then risk_management is infringement
+  rule: if risk_assessment is moderate and attitude_offence is accidental then risk_management is counselling
+  rule: if risk_assessment is low and attitude_offence is accidental then risk_management is educate
+  rule: if risk_assessment is moderate and attitude_offence is accidental and attitude_following is unwilling then risk_management is infringement
+  rule: if risk_assessment is moderate and compliance_history is first and persistence_noncompliance is first then risk_management is counselling
+  rule: if risk_assessment is low and compliance_history is first and persistence_noncompliance is first then risk_management is awareness
+  rule: if risk_assessment is moderate and attitude_offence is ignorant and compliance_history is any then risk_management is direction
+  rule: if risk_assessment is low and attitude_offence is ignorant and compliance_history is any then risk_management is infringement
+  rule: if legislative_guidance is low then risk_management is counselling
+  rule: if legislative_guidance is low then risk_management is educate
+  rule: if legislative_guidance is low then risk_management is awareness
+  rule: if legislative_guidance is low and risk_assessment is extreme then risk_management is counselling
+  rule: if legislative_guidance is low and risk_assessment is moderate then risk_management is awareness
+  rule: if legislative_guidance is high and risk_assessment is moderate or compliance_history is any then risk_management is infringement
+  rule: if legislative_guidance is high and risk_assessment is extreme and attitude_offence is deliberate and compliance_history is repeat and ability_remedial is unable and attitude_following is unwilling and persistence_noncompliance is reincidence then risk_management is prosecution
+  rule: if legislative_guidance is high and risk_assessment is extreme and attitude_offence is deliberate and compliance_history is repeat and ability_remedial is unable and attitude_following is unwilling and persistence_noncompliance is reincidence then risk_management is injunction
+  rule: if legislative_guidance is high and risk_assessment is extreme and attitude_offence is deliberate and compliance_history is repeat and ability_remedial is unable and attitude_following is unwilling and persistence_noncompliance is reincidence then risk_management is order
+  rule: if legislative_guidance is low and risk_assessment is low and attitude_offence is accidental and compliance_history is first and ability_remedial is able and attitude_following is willing and persistence_noncompliance is first then risk_management is awareness

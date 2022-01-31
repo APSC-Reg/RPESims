@@ -12,8 +12,10 @@ import platform
 
 if platform.system() == 'Darwin':
     main_path = Path(".")
+    logo_path = Path(".")
 else:
     main_path = Path("DDMSim")
+    logo_path = Path("DDMSim")
 
 ############
 ### FIS ####
@@ -83,7 +85,7 @@ apptitle = 'Defensible Decision Making Simulator'
 
 st.set_page_config(page_title=apptitle, layout="wide", page_icon=":eyeglasses:")
 
-st.sidebar.image('DDMSim logo.png')
+st.sidebar.image(str(logo_path.joinpath('DDMSim logo.png')))
 st.sidebar.markdown('This simulator is a learning tool that helps understand defensible decision making in regulatory systems. It should not be used or applied as a definitive decision making tool in the workplace.')
 
 st.sidebar.markdown('## User Inputs')

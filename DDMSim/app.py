@@ -78,7 +78,7 @@ def fis(input_list):
 ###########
 
 if "df" not in st.session_state:
-    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Low","High","DDMSim"]
+    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Low","High","Threshold","DDMSim"]
     st.session_state.df = pd.DataFrame(columns = column_names)
 
 apptitle = 'Defensible Decision Making Simulator'
@@ -91,7 +91,7 @@ st.sidebar.markdown('This simulator is a learning tool that helps understand def
 st.sidebar.markdown('## User Inputs')
 
 if st.sidebar.button("Reset values", key=None, help="press this button to reset the trajectory table and trajectory plot", on_click=None):
-    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Low","High","DDMSim"]
+    column_names = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Low","High","Threshold","DDMSim"]
     st.session_state.df = pd.DataFrame(columns = column_names)
 
 with st.sidebar.form(key ='Form1'):
@@ -144,7 +144,7 @@ with st.sidebar.form(key ='Form1'):
 
     if st.form_submit_button("Submit 👍🏼"):
         
-        to_append = [option_1,option_2,option_3,option_4,option_5,option_6,option_7,option_8,option_9,values[0],values[1],int(DDM_result*100)]
+        to_append = [option_1,option_2,option_3,option_4,option_5,option_6,option_7,option_8,option_9,values[0],values[1],threshold,int(DDM_result*100)]
         a_series = pd.Series(to_append, index = st.session_state.df.columns)
  
         st.session_state.df = st.session_state.df.append(a_series, ignore_index=True)
@@ -202,12 +202,17 @@ with col2:
 
     high_trace_x = st.session_state.df.index.tolist()
     high_trace_y = st.session_state.df.High.to_numpy()
+    
+    threshold_trace_x = st.session_state.df.index.tolist()
+    threshold_trace_y = st.session_state.df.Threshold.to_numpy()
 
     fig = go.Figure()
     
-    fig.add_trace(go.Scatter(x=low_trace_x, y=low_trace_y, fill=None, mode='lines', line_color='orange'))
-    fig.add_trace(go.Scatter(x=high_trace_x, y=high_trace_y, fill='tonexty', mode='lines', line_color='orange'))
-    fig.add_trace(go.Scatter(x=ddmsim_trace_x, y=ddmsim_trace_y, fill=None, mode='lines+markers', line_color='black'))
+    fig.add_trace(go.Scatter(x=low_trace_x, y=low_trace_y, fill=None, mode='lines', line_color='orange', name='low guess'))
+    fig.add_trace(go.Scatter(x=high_trace_x, y=high_trace_y, fill='tonexty', mode='lines', line_color='orange', name='high guess'))
+    fig.add_trace(go.Scatter(x=ddmsim_trace_x, y=ddmsim_trace_y, fill=None, mode='lines+markers', line_color='black', name='DDMSim'))
+    fig.add_trace(go.Scatter(x=threshold_trace_x, y=threshold_trace_y, fill=None, mode='lines', line_color='red', name='Threshold'))
+
 
     config = {'staticPlot': True}
 

@@ -13,7 +13,7 @@ import platform
 if platform.system() == 'Darwin':
     main_path = Path(".")
 else:
-    main_path = Path("streamlit")
+    main_path = Path("DDMSim")
 
 ############
 ### FIS ####

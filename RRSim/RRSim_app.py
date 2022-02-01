@@ -126,17 +126,17 @@ with st.sidebar.form(key ='Form1'):
     
     st.subheader("Case Study Context")
     
-    option_1 = st.selectbox('Q1: What level of intervention does the policy allow for?',('High', 'Medium', 'Low'), key=1)
+    option_1 = st.selectbox('Q1: What level of regulatory intervention does the policy allow for?',('High', 'Medium', 'Low'), key=1)
 
-    option_2 = st.selectbox('Q2: What is the actual or potential risk assessment?',('Extreme', 'Moderate', 'Low'), key=2)
+    option_2 = st.selectbox('Q2: What is the actual or potential risk assessment in terms of impact of non-compliance?',('Extreme', 'Moderate', 'Low'), key=2)
 
-    option_3 = st.selectbox('Q3: What is the attitude leading to the offence?',('Deliberate', 'Ignorant', 'Accidental'), key=3)
+    option_3 = st.selectbox('Q3: What is the attitude and behaviour of the regulated entity leading to the non-compliance?',('Deliberate', 'Ignorant', 'Accidental'), key=3)
 
     option_4 = st.selectbox('Q4: What is the compliance history?',('Repeat', 'First'), key=4)
 
-    option_5 = st.selectbox('Q5: What is the ability to take remedial action?',('Unable', 'Able'), key=5)
+    option_5 = st.selectbox('Q5: What is the ability of the regulated entity take remedial action?',('Unable', 'Able'), key=5)
 
-    option_6 = st.selectbox('Q6: What is the attitude during or following regulatory action?',('Unwilling', 'Willing'), key=6)
+    option_6 = st.selectbox('Q6: What is the attitude and behaviour of the regulated entity during or following the initiation of regulatory action?',('Unwilling', 'Willing'), key=6)
 
     option_7 = st.selectbox('Q7: Does non-compliance persist?',('Reincidence', 'First'), key=7)
         

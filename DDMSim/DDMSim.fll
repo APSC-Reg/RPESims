@@ -52,8 +52,9 @@ InputVariable: Level_of_Discretion
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: limited Sigmoid 0.500 -40.000
-  term: broad Sigmoid 0.500 40.000
+  term: nil Sigmoid 0.260 -40.000
+  term: limited Bell 0.500 0.275 3.000
+  term: broad Sigmoid 0.720 40.000
 InputVariable: Processes_Fair_and_Impartial
   enabled: true
   range: 0.000 1.000
@@ -105,3 +106,53 @@ RuleBlock: Darren & Grant + Juan's corrections
   rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no and Level_of_Discretion is broad then Defensible_Decision is maybe_not
   rule: if Facts_Relevant is yes and Facts_Credible is yes and Facts_Sufficient is yes and Decisions_Documented_Consistently is no and Level_of_Discretion is limited then Defensible_Decision is no
   rule: if Processes_Fair_and_Impartial is no or Processes_Fair_and_Impartial is maybe then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil and Facts_Relevant is any and Facts_Credible is any and Facts_Sufficient is any and Decisions_Documented_Consistently is any and Conclusions_Reasonable_and_Rational is any and Applying_Policy_Correctly is any and Decision_Within_Limits is any and Processes_Fair_and_Impartial is any then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no
+  rule: if Level_of_Discretion is nil then Defensible_Decision is no

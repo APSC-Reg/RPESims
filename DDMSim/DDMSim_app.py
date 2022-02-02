@@ -112,7 +112,7 @@ with st.sidebar.form(key ='Form1'):
 
     option_7 = st.selectbox('Q7: Is the decision within limits of the source of power?',('Yes', 'Maybe', 'No'), key=7)
 
-    option_8 = st.selectbox('Q8: Does it give you discretion?',('Broad', 'Limited'), key=8)
+    option_8 = st.selectbox('Q8: Does it give you discretion?',('Broad', 'Limited', 'Nil'), key=8)
 
     option_9 = st.selectbox('Q9: Are the processes and procedures fair and impartial?',('Yes', 'Maybe', 'No'), key=9)
         
@@ -138,7 +138,8 @@ with st.sidebar.form(key ='Form1'):
     option_9_num = YMN_to_num(option_9)
     
     if option_8 == 'Broad': option_8_num = 1
-    if option_8 == 'Limited': option_8_num = 0
+    if option_8 == 'Limited': option_8_num = 0.5
+    if option_8 == 'Nil': option_8_num = 0
    
     DDM_result = fis([option_1_num,option_2_num,option_3_num,option_4_num,option_5_num,option_6_num,option_7_num,option_8_num,option_9_num])
 

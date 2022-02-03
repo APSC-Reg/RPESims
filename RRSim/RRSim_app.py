@@ -57,7 +57,7 @@ def Q6_to_num(answer):
     return result
 
 def Q7_to_num(answer):
-    if answer == 'Reincidence': result = 1
+    if answer == 'Recurrence': result = 1
     if answer == 'First': result = 0
     return result
 

@@ -134,11 +134,11 @@ with st.sidebar.form(key ='Form1'):
 
     option_4 = st.selectbox('Q4: What is the compliance history?',('Repeat', 'First'), key=4)
 
-    option_5 = st.selectbox('Q5: What is the ability of the regulated entity take remedial action?',('Unable', 'Able'), key=5)
+    option_5 = st.selectbox('Q5: What is the ability of the regulated entity to take remedial action?',('Unable', 'Able'), key=5)
 
     option_6 = st.selectbox('Q6: What is the attitude and behaviour of the regulated entity during or following the initiation of regulatory action?',('Unwilling', 'Willing'), key=6)
 
-    option_7 = st.selectbox('Q7: Does non-compliance persist?',('Reincidence', 'First'), key=7)
+    option_7 = st.selectbox('Q7: Does non-compliance persist?',('Recurrence', 'First'), key=7)
         
     st.subheader("Your guess")
     

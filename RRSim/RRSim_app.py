@@ -48,17 +48,20 @@ def Q4_to_num(answer):
 
 def Q5_to_num(answer):
     if answer == 'Unable': result = 1
+    if answer == 'Uncertain': result = 0.5
     if answer == 'Able': result = 0
     return result
 
 def Q6_to_num(answer):
     if answer == 'Unwilling': result = 1
+    if answer == 'Undecided': result = 0.5
     if answer == 'Willing': result = 0
     return result
 
 def Q7_to_num(answer):
-    if answer == 'Recurrence': result = 1
-    if answer == 'First': result = 0
+    if answer == 'Yes': result = 1
+    if answer == 'Unsure': result = 0.5
+    if answer == 'No': result = 0
     return result
 
 # READ FILE:
@@ -134,11 +137,11 @@ with st.sidebar.form(key ='Form1'):
 
     option_4 = st.selectbox('Q4: What is the compliance history?',('Repeat', 'First'), key=4)
 
-    option_5 = st.selectbox('Q5: What is the ability of the regulated entity to take remedial action?',('Unable', 'Able'), key=5)
+    option_5 = st.selectbox('Q5: What is the ability of the regulated entity to take remedial action?',('Unable', 'Uncertain', 'Able'), key=5)
 
-    option_6 = st.selectbox('Q6: What is the attitude and behaviour of the regulated entity during or following the initiation of regulatory action?',('Unwilling', 'Willing'), key=6)
+    option_6 = st.selectbox('Q6: What is the attitude and behaviour of the regulated entity during or following the initiation of regulatory action?',('Unwilling', 'Undecided','Willing'), key=6)
 
-    option_7 = st.selectbox('Q7: Does non-compliance persist?',('Recurrence', 'First'), key=7)
+    option_7 = st.selectbox('Q7: Does non-compliance persist?',('Yes', 'Unsure', 'First'), key=7)
         
     st.subheader("Your guess")
     

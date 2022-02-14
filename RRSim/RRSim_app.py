@@ -69,6 +69,12 @@ df_FIS = pd.read_csv(FIS_path, sep='\s', engine='python')
 df_FIS_in = df_FIS.iloc[:, :-1]
 df_FIS_in = df_FIS_in.to_numpy()
 df_FIS_out = df_FIS.iloc[:, df_FIS.shape[1] - 1]
+
+# NORMALISE 0-1
+a, b = 0, 1
+x, y = df_FIS_out.min(), df_FIS_out.max()
+df_FIS_out = (df_FIS_out - x) / (y - x) * (b - a) + a
+
 # GENERATE TREE:
 tree_FIS = spatial.KDTree(data = df_FIS_in, copy_data = True)
 
@@ -141,14 +147,12 @@ with st.sidebar.form(key ='Form1'):
 
     option_6 = st.selectbox('Q6: What is the attitude and behaviour of the regulated entity during or following the initiation of regulatory action?',('Unwilling', 'Undecided','Willing'), key=6)
 
-    option_7 = st.selectbox('Q7: Does non-compliance persist?',('Yes', 'Unsure', 'First'), key=7)
+    option_7 = st.selectbox('Q7: Does non-compliance persist?',('Yes', 'Unsure', 'No'), key=7)
         
-    st.subheader("Your guess")
+    st.subheader("Your estimate")
     
     values = st.slider('What compliance responses should be undertaken (select a range; this will displayed in grey within the gauge)?',0, 100, (25, 75))
-    
-    value = np.random.randint(low=0, high=100)
-    
+        
     st.subheader("Your threshold")
     
     threshold = st.slider('What would you accept as the minimum level of response in this context (this will be displayed as a red line in the gauge)?',0, 100, 80)
@@ -197,8 +201,10 @@ def update_gauge():
 
     fig.update_layout(width=500, height=500)
     fig.update_traces(gauge_axis_tickmode = 'array',
-                      gauge_axis_tickvals = [100/9*1, 100/9*2, 100/9*3, 100/9*4, 100/9*5, 100/9*6, 100/9*7, 100/9*8, 100/9*9],
-                      gauge_axis_ticktext = ['Awareness', 'Education', 'Counselling', 'Infringement', 'Undertakings', 'Direction','Order','Injunction','Prosecution'])
+                      gauge_axis_tickvals = [0, 100/8*1, 100/8*2, 100/8*3, 100/8*4, 100/8*5, 100/8*6, 100/8*7, 100],
+                      gauge_axis_ticktext = ['Awareness (0%)', 'Education (12.5%)', 'Counselling (25%)', 'Infringement (37.5%)', 'Undertakings (50%)', 'Direction (62.5%)','Order (75%)','Injunction (87.5%)','Prosecution (100%)'])
+    fig.update_layout(font=dict(size=18))
+
     st.plotly_chart(fig, use_container_width=True)        
         
 update_gauge()
@@ -234,11 +240,10 @@ with col2:
 
     fig = go.Figure()
     
-    fig.add_trace(go.Scatter(x=low_trace_x, y=low_trace_y, fill=None, mode='lines', line_color='orange', name='low guess'))
-    fig.add_trace(go.Scatter(x=high_trace_x, y=high_trace_y, fill='tonexty', mode='lines', line_color='orange', name='high guess'))
-    fig.add_trace(go.Scatter(x=rrsim_trace_x, y=rrsim_trace_y, fill=None, mode='lines+markers', line_color='black', name='RRSim'))
-    fig.add_trace(go.Scatter(x=threshold_trace_x, y=threshold_trace_y, fill=None, mode='lines', line_color='red', name='Threshold'))
-
+    fig.add_trace(go.Scatter(x=low_trace_x, y=low_trace_y, fill=None, mode='lines', line_color='grey', name='low estimate'))
+    fig.add_trace(go.Scatter(x=high_trace_x, y=high_trace_y, fill='tonexty', mode='lines', line_color='grey', name='high estimate'))
+    fig.add_trace(go.Scatter(x=rrsim_trace_x, y=rrsim_trace_y, fill=None, mode='lines+markers', line_color='darkgreen', line_width=8 ,name='RRSim'))
+    fig.add_trace(go.Scatter(x=threshold_trace_x, y=threshold_trace_y, fill=None, mode='lines', line_color='red', line_width=4, name='Threshold'))
 
     config = {'staticPlot': True}
 
@@ -249,6 +254,8 @@ with col2:
         range=[0, 100],
         ticksuffix='%'))
     
+    fig.update_layout(font=dict(size=18))
+   
     st.plotly_chart(fig, use_container_width=False, config=config)
     
 

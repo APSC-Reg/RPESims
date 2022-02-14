@@ -50,6 +50,13 @@ df_FIS = pd.read_csv(FIS_path, sep='\s', engine='python')
 df_FIS_in = df_FIS.iloc[:, :-1]
 df_FIS_in = df_FIS_in.to_numpy()
 df_FIS_out = df_FIS.iloc[:, df_FIS.shape[1] - 1]
+
+# NORMALISE 0-1
+a, b = 0, 1
+x, y = df_FIS_out.min(), df_FIS_out.max()
+df_FIS_out = (df_FIS_out - x) / (y - x) * (b - a) + a
+
+
 # GENERATE TREE:
 tree_FIS = spatial.KDTree(data = df_FIS_in, copy_data = True)
 
@@ -124,7 +131,7 @@ with st.sidebar.form(key ='Form1'):
 
     option_7 = st.selectbox('Q7: Consequence?',('Negligible','Minor','Moderate','Major','Catastrophic'), key=7)
         
-    st.subheader("Your guess")
+    st.subheader("Your estimate")
     
     values = st.slider('What level of risk management should be adopted (select a range; this will displayed in grey within the gauge)?',0, 100, (25, 75))
     
@@ -179,7 +186,9 @@ def update_gauge():
     fig.update_layout(width=500, height=500)
     fig.update_traces(gauge_axis_tickmode = 'array',
                       gauge_axis_tickvals = [0, 20, 40, 60, 80, 100],
-                      gauge_axis_ticktext = ['Avoid', 'Remove', 'Reduce Likelihood', 'Reduce Consequence', 'Share', 'Accept'])
+                      gauge_axis_ticktext = ['Accept (0%)', 'Share (20%)', 'Reduce Consequence (40%)', 'Reduce Likelihood (60%)', 'Remove (80%)', 'Avoid (100%)'])
+    
+    fig.update_layout(font=dict(size=18))
     
     st.plotly_chart(fig, use_container_width=True)        
         
@@ -216,10 +225,10 @@ with col2:
 
     fig = go.Figure()
     
-    fig.add_trace(go.Scatter(x=low_trace_x, y=low_trace_y, fill=None, mode='lines', line_color='orange', name='low guess'))
-    fig.add_trace(go.Scatter(x=high_trace_x, y=high_trace_y, fill='tonexty', mode='lines', line_color='orange', name='high guess'))
-    fig.add_trace(go.Scatter(x=risksim_trace_x, y=risksim_trace_y, fill=None, mode='lines+markers', line_color='black', name='RISKSim'))
-    fig.add_trace(go.Scatter(x=threshold_trace_x, y=threshold_trace_y, fill=None, mode='lines', line_color='red', name='Threshold'))
+    fig.add_trace(go.Scatter(x=low_trace_x, y=low_trace_y, fill=None, mode='lines', line_color='grey', name='low estimate'))
+    fig.add_trace(go.Scatter(x=high_trace_x, y=high_trace_y, fill='tonexty', mode='lines', line_color='grey', name='high estimate'))
+    fig.add_trace(go.Scatter(x=risksim_trace_x, y=risksim_trace_y, fill=None, mode='lines+markers', line_color='darkgreen', line_width=8, name='RISKSim'))
+    fig.add_trace(go.Scatter(x=threshold_trace_x, y=threshold_trace_y, fill=None, mode='lines', line_color='red', line_width=4, name='Threshold'))
 
 
     config = {'staticPlot': True}
@@ -230,6 +239,8 @@ with col2:
         type='linear',
         range=[0, 100],
         ticksuffix='%'))
+    
+    fig.update_layout(font=dict(size=18))
     
     st.plotly_chart(fig, use_container_width=False, config=config)
     

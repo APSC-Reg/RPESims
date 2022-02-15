@@ -54,7 +54,7 @@ df_FIS_out = df_FIS.iloc[:, df_FIS.shape[1] - 1]
 # NORMALISE 0-1
 a, b = 0, 1
 x, y = df_FIS_out.min(), df_FIS_out.max()
-df_FIS_out = (df_FIS_out - x) / (y - x) * (b - a) + a
+df_FIS_out = 1 - (df_FIS_out - x) / (y - x) * (b - a) + a
 
 
 # GENERATE TREE:

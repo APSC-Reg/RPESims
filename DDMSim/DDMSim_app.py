@@ -179,7 +179,7 @@ def update_gauge():
                     
                  'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': threshold}}))
 
-    fig.update_layout(width=500, height=500)
+    fig.update_layout(width=500, height=700)
     fig.update_traces(gauge_axis_tickmode = 'array',
                       gauge_axis_tickvals = [0, 50, 100],
                       gauge_axis_ticktext = ['No (0%)', 'Maybe (50%)', 'Yes (100%)'])

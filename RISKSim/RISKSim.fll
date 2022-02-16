@@ -36,20 +36,20 @@ InputVariable: likelihood_rating
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: rare Sigmoid 0.109 -40.000
-  term: unlikely Bell 0.265 0.061 3.000
+  term: rare Sigmoid 0.199 -40.000
+  term: unlikely Bell 0.315 0.061 3.000
   term: possible Bell 0.503 0.060 3.000
-  term: likely Bell 0.715 0.061 3.000
-  term: probable Sigmoid 0.910 40.000
+  term: likely Bell 0.685 0.061 3.000
+  term: probable Sigmoid 0.800 40.000
 InputVariable: consequence_rating
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: negligible Sigmoid 0.100 -40.000
-  term: minor Bell 0.250 0.085 3.000
+  term: negligible Sigmoid 0.200 -40.000
+  term: minor Bell 0.320 0.075 3.000
   term: moderate Bell 0.500 0.065 3.000
-  term: major Bell 0.750 0.075 3.000
-  term: catastrophic Sigmoid 0.900 40.000
+  term: major Bell 0.680 0.075 3.000
+  term: catastrophic Sigmoid 0.800 40.000
 OutputVariable: risk_management
   enabled: true
   range: 0.000 1.000
@@ -80,7 +80,7 @@ RuleBlock: Darren and Grant
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is rare and consequence_rating is catastrophic then risk_management is remove
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is catastrophic then risk_management is avoid
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible or likelihood_rating is unlikely and consequence_rating is major then risk_management is reduce_con
-  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is major then risk_management is reduce_like
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is major then risk_management is reduce_con
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is unlikely and consequence_rating is moderate then risk_management is accept
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is moderate then risk_management is reduce_con
   rule: if identified_risk is no and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes then risk_management is accept

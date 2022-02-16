@@ -126,6 +126,8 @@ with st.sidebar.form(key ='Form1'):
     option_4 = st.selectbox('Q4: Clear understanding of your agency risk appetite?',('Yes', 'Maybe', 'No'), key=4)
 
     option_5 = st.selectbox('Q5: Process to identify risk rigorous, repeatable, verifiable?',('Yes', 'Maybe', 'No'), key=5)
+    
+    option_5 = 'Yes'
 
     option_6 = st.selectbox('Q6: Likelihood?',('Rare', 'Unlikely','Possible','Likely','Probable'), key=6)
 

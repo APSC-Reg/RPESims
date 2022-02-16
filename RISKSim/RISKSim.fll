@@ -71,7 +71,7 @@ RuleBlock: Darren and Grant
   implication: EinsteinProduct
   activation: Proportional
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is rare and consequence_rating is negligible then risk_management is accept
-  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible and consequence_rating is minor then risk_management is accept
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible and consequence_rating is minor then risk_management is share
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible and consequence_rating is moderate then risk_management is share
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible and consequence_rating is major then risk_management is reduce_con
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible and consequence_rating is major then risk_management is remove
@@ -79,7 +79,7 @@ RuleBlock: Darren and Grant
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is catastrophic then risk_management is avoid
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is rare and consequence_rating is catastrophic then risk_management is remove
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is catastrophic then risk_management is avoid
-  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible or likelihood_rating is unlikely and consequence_rating is major then risk_management is reduce_con
+  rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is possible or likelihood_rating is unlikely and consequence_rating is major then risk_management is share
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is major then risk_management is reduce_con
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is unlikely and consequence_rating is moderate then risk_management is accept
   rule: if identified_risk is yes and industry_acceptance is yes and community_acceptance is yes and clear_understanding is yes and likelihood_rating is probable and consequence_rating is moderate then risk_management is reduce_con

@@ -68,7 +68,7 @@ RuleBlock: Workshop
   implication: EinsteinProduct
   activation: Proportional
   rule: if legislative_guidance is high and risk_assessment is moderate or risk_assessment is low and compliance_history is repeat and persistence_noncompliance is reincidence then risk_management is prosecution
-  rule: if legislative_guidance is high and risk_assessment is extreme and attitude_offence is deliberate and compliance_history is repeat or compliance_history is first then risk_management is prosecution
+  rule: if legislative_guidance is high and risk_assessment is extreme and attitude_offence is deliberate and compliance_history is repeat then risk_management is prosecution
   rule: if legislative_guidance is high and attitude_offence is deliberate and attitude_following is unwilling and persistence_noncompliance is reincidence then risk_management is prosecution
   rule: if legislative_guidance is medium or legislative_guidance is high and risk_assessment is extreme and compliance_history is seldom repeat then risk_management is injunction
   rule: if risk_assessment is extreme and ability_remedial is unable then risk_management is injunction

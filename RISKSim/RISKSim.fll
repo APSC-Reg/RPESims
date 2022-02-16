@@ -40,7 +40,7 @@ InputVariable: likelihood_rating
   term: unlikely Bell 0.285 0.051 3.000
   term: possible Bell 0.503 0.050 3.000
   term: likely Bell 0.705 0.051 3.000
-  term: probable Sigmoid 0.880 40.000
+  term: probable Sigmoid 0.910 40.000
 InputVariable: consequence_rating
   enabled: true
   range: 0.000 1.000
@@ -49,7 +49,7 @@ InputVariable: consequence_rating
   term: minor Bell 0.250 0.065 3.000
   term: moderate Bell 0.500 0.065 3.000
   term: major Bell 0.710 0.065 3.000
-  term: catastrophic Sigmoid 0.880 40.000
+  term: catastrophic Sigmoid 0.940 40.000
 OutputVariable: risk_management
   enabled: true
   range: 0.000 1.000

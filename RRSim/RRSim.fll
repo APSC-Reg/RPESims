@@ -4,15 +4,15 @@ InputVariable: legislative_guidance
   range: 0.000 1.000
   lock-range: false
   term: low Sigmoid 0.300 -40.000
-  term: medium Bell 0.500 0.215 3.000
+  term: medium Bell 0.500 0.155 3.000
   term: high Sigmoid 0.700 40.000
 InputVariable: risk_assessment
   enabled: true
   range: 0.000 1.000
   lock-range: false
-  term: low Sigmoid 0.330 -40.000
-  term: moderate Bell 0.500 0.215 3.000
-  term: extreme Sigmoid 0.680 40.000
+  term: low Sigmoid 0.270 -40.000
+  term: moderate Bell 0.500 0.155 3.000
+  term: extreme Sigmoid 0.760 40.000
 InputVariable: attitude_offence
   enabled: true
   range: 0.000 1.000
@@ -70,7 +70,7 @@ RuleBlock: Workshop
   rule: if legislative_guidance is high and risk_assessment is moderate or risk_assessment is low and compliance_history is repeat and persistence_noncompliance is reincidence then risk_management is prosecution
   rule: if legislative_guidance is high and risk_assessment is extreme and attitude_offence is deliberate and compliance_history is repeat then risk_management is prosecution
   rule: if legislative_guidance is high and attitude_offence is deliberate and attitude_following is unwilling and persistence_noncompliance is reincidence then risk_management is prosecution
-  rule: if legislative_guidance is medium or legislative_guidance is high and risk_assessment is extreme and compliance_history is seldom repeat then risk_management is injunction
+  rule: if legislative_guidance is high and risk_assessment is extreme and compliance_history is repeat then risk_management is injunction
   rule: if risk_assessment is extreme and ability_remedial is unable then risk_management is injunction
   rule: if risk_assessment is extreme and attitude_offence is accidental then risk_management is undertakings
   rule: if risk_assessment is moderate and attitude_offence is accidental then risk_management is infringement
@@ -86,7 +86,7 @@ RuleBlock: Workshop
   rule: if legislative_guidance is low then risk_management is awareness
   rule: if legislative_guidance is low and risk_assessment is extreme then risk_management is counselling
   rule: if legislative_guidance is low and risk_assessment is moderate then risk_management is awareness
-  rule: if legislative_guidance is high and risk_assessment is moderate or compliance_history is any then risk_management is infringement
+  rule: if legislative_guidance is high and risk_assessment is moderate then risk_management is infringement
   rule: if legislative_guidance is high and risk_assessment is extreme and attitude_offence is deliberate and compliance_history is repeat and ability_remedial is unable and attitude_following is unwilling and persistence_noncompliance is reincidence then risk_management is prosecution
   rule: if legislative_guidance is high and risk_assessment is extreme and attitude_offence is deliberate and compliance_history is repeat and ability_remedial is unable and attitude_following is unwilling and persistence_noncompliance is reincidence then risk_management is injunction
   rule: if legislative_guidance is high and risk_assessment is extreme and attitude_offence is deliberate and compliance_history is repeat and ability_remedial is unable and attitude_following is unwilling and persistence_noncompliance is reincidence then risk_management is order

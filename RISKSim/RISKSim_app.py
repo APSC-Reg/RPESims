@@ -242,7 +242,7 @@ with col2:
         range=[0, 100],
         ticksuffix='%'))
     
-    fig.update_layout(font=dict(size=18))
+    fig.update_layout(font=dict(size=10))
     
     st.plotly_chart(fig, use_container_width=False, config=config)
     

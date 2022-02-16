@@ -176,7 +176,7 @@ def update_gauge():
         value = int(RISK_result*100),
         number = { 'suffix': '%' },
         mode = "gauge+number",
-        title = {'text': "What level of risk management should be adopted?", 'font': {'size': 30}},
+        title = {'text': "Level of risk management adopted?", 'font': {'size': 30}},
         delta = {'reference': 0},
         gauge = {'axis': {'range': [None, 100]},
                  'steps' : [

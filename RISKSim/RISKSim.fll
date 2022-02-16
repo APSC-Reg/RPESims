@@ -34,7 +34,7 @@ InputVariable: process_identify
   term: yes Sigmoid 0.670 40.000
 InputVariable: likelihood_rating
   enabled: true
-  range: 0.000 0.960
+  range: 0.000 0.940
   lock-range: false
   term: rare Sigmoid 0.190 -40.000
   term: unlikely Bell 0.290 0.125 3.000
@@ -104,7 +104,6 @@ RuleBlock: Darren and Grant
   rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no and clear_understanding is yes then risk_management is reduce_like
   rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no and clear_understanding is maybe then risk_management is reduce_con
   rule: if identified_risk is yes and industry_acceptance is no and community_acceptance is no and clear_understanding is no then risk_management is remove
-  rule: if identified_risk is yes and process_identify is yes then risk_management is accept and risk_management is share and risk_management is reduce_con and risk_management is reduce_like and risk_management is remove and risk_management is avoid
   rule: if identified_risk is yes and process_identify is no then risk_management is remove
   rule: if identified_risk is yes and process_identify is no then risk_management is avoid
   rule: if identified_risk is yes and process_identify is maybe then risk_management is reduce_con

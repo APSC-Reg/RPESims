@@ -199,11 +199,11 @@ def update_gauge():
                     
                  'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': threshold}}))
 
-    fig.update_layout(width=500, height=500)
+    fig.update_layout(width=500, height=700)
     fig.update_traces(gauge_axis_tickmode = 'array',
                       gauge_axis_tickvals = [0, 100/8*1, 100/8*2, 100/8*3, 100/8*4, 100/8*5, 100/8*6, 100/8*7, 100],
                       gauge_axis_ticktext = ['Awareness (0%)', 'Education (12.5%)', 'Counselling (25%)', 'Infringement (37.5%)', 'Undertakings (50%)', 'Direction (62.5%)','Order (75%)','Injunction (87.5%)','Prosecution (100%)'])
-    fig.update_layout(font=dict(size=18))
+    fig.update_layout(font=dict(size=10))
 
     st.plotly_chart(fig, use_container_width=True)        
         
@@ -254,7 +254,7 @@ with col2:
         range=[0, 100],
         ticksuffix='%'))
     
-    fig.update_layout(font=dict(size=18))
+    fig.update_layout(font=dict(size=10))
    
     st.plotly_chart(fig, use_container_width=False, config=config)
     

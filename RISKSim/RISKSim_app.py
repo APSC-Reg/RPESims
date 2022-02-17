@@ -190,7 +190,7 @@ def update_gauge():
                       gauge_axis_tickvals = [0, 20, 40, 60, 80, 100],
                       gauge_axis_ticktext = ['Accept (0%)', 'Share (20%)', 'Reduce Consequence (40%)', 'Reduce Likelihood (60%)', 'Remove (80%)', 'Avoid (100%)'])
     
-    fig.update_layout(font=dict(size=10))
+    fig.update_layout(font=dict(size=13))
     
     st.plotly_chart(fig, use_container_width=True)        
         
@@ -242,7 +242,7 @@ with col2:
         range=[0, 100],
         ticksuffix='%'))
     
-    fig.update_layout(font=dict(size=10))
+    fig.update_layout(font=dict(size=13))
     
     st.plotly_chart(fig, use_container_width=False, config=config)
     

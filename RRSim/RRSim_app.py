@@ -203,7 +203,7 @@ def update_gauge():
     fig.update_traces(gauge_axis_tickmode = 'array',
                       gauge_axis_tickvals = [0, 100/8*1, 100/8*2, 100/8*3, 100/8*4, 100/8*5, 100/8*6, 100/8*7, 100],
                       gauge_axis_ticktext = ['Awareness (0%)', 'Education (12.5%)', 'Counselling (25%)', 'Infringement (37.5%)', 'Undertakings (50%)', 'Direction (62.5%)','Order (75%)','Injunction (87.5%)','Prosecution (100%)'])
-    fig.update_layout(font=dict(size=10))
+    fig.update_layout(font=dict(size=13))
 
     st.plotly_chart(fig, use_container_width=True)        
         
@@ -254,7 +254,7 @@ with col2:
         range=[0, 100],
         ticksuffix='%'))
     
-    fig.update_layout(font=dict(size=10))
+    fig.update_layout(font=dict(size=13))
    
     st.plotly_chart(fig, use_container_width=False, config=config)
     

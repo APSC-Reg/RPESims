@@ -43,7 +43,7 @@ def Q3_to_num(answer):
 
 def Q4_to_num(answer):
     if answer == 'Repeat': result = 1
-    if answer == 'First': result = 0
+    if answer == 'No': result = 0
     return result
 
 def Q5_to_num(answer):
@@ -141,7 +141,7 @@ with st.sidebar.form(key ='Form1'):
 
     option_3 = st.selectbox('Q3: What is the attitude and behaviour of the regulated entity leading to the non-compliance?',('Deliberate', 'Ignorant', 'Accidental'), key=3)
 
-    option_4 = st.selectbox('Q4: What is the compliance history?',('Repeat', 'First'), key=4)
+    option_4 = st.selectbox('Q4: What is the compliance history?',('Repeat', 'No'), key=4)
 
     option_5 = st.selectbox('Q5: What is the ability of the regulated entity to take remedial action?',('Unable', 'Uncertain', 'Able'), key=5)
 

@@ -1,0 +1,84 @@
+Engine: RESPONSim
+InputVariable: legislative_guidance
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: low Sigmoid 0.300 -40.000
+  term: medium Bell 0.500 0.155 3.000
+  term: high Sigmoid 0.700 40.000
+InputVariable: risk_assessment
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: low Sigmoid 0.270 -40.000
+  term: moderate Bell 0.500 0.155 3.000
+  term: extreme Sigmoid 0.760 40.000
+InputVariable: attitude_offence
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: accidental Sigmoid 0.330 -40.000
+  term: ignorant Bell 0.500 0.215 3.000
+  term: deliberate Sigmoid 0.680 40.000
+InputVariable: compliance_history
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: first Sigmoid 0.520 -15.000
+  term: repeat Sigmoid 0.490 15.000
+InputVariable: ability_remedial
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: able Sigmoid 0.520 -15.000
+  term: unable Sigmoid 0.510 15.000
+InputVariable: attitude_following
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: willing Sigmoid 0.560 -15.000
+  term: unwilling Sigmoid 0.450 15.000
+InputVariable: persistence_noncompliance
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  term: first Sigmoid 0.540 -15.000
+  term: reincidence Sigmoid 0.450 15.000
+OutputVariable: risk_management
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: EinsteinSum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: awareness Sigmoid 0.130 -40.000
+  term: educate Bell 0.100 0.085 3.000
+  term: counselling Bell 0.220 0.085 3.000
+  term: infringement Bell 0.340 0.085 3.000
+  term: undertakings Bell 0.470 0.095 3.000
+  term: direction Bell 0.600 0.095 3.000
+  term: order Bell 0.730 0.095 3.000
+  term: injunction Bell 0.860 0.095 3.000
+  term: prosecution Sigmoid 0.860 40.000
+RuleBlock: Workshop
+  enabled: true
+  conjunction: EinsteinProduct
+  disjunction: EinsteinSum
+  implication: EinsteinProduct
+  activation: Proportional
+  rule: if legislative_guidance is low then risk_management is awareness with 15
+  rule: if risk_assessment is low then risk_management is awareness
+  rule: if risk_assessment is moderate then risk_management is infringement
+  rule: if risk_assessment is extreme  then risk_management is prosecution with 5
+  rule: if attitude_offence is accidental then risk_management is awareness
+  rule: if attitude_offence is ignorant then risk_management is undertakings
+  rule: if attitude_offence is deliberate then risk_management is prosecution
+  rule: if compliance_history is first then risk_management is awareness
+  rule: if compliance_history is repeat then risk_management is prosecution
+  rule: if ability_remedial is able then risk_management is awareness
+  rule: if ability_remedial is unable then risk_management is prosecution
+  rule: if attitude_following is willing then risk_management is awareness
+  rule: if attitude_following is unwilling then risk_management is prosecution
+  rule: if persistence_noncompliance is first then risk_management is awareness
+  rule: if persistence_noncompliance is reincidence then risk_management is prosecution

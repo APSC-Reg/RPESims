@@ -154,7 +154,7 @@ with st.sidebar.form(key ='Form1'):
         to_append = [option_1,option_2,option_3,option_4,option_5,option_6,option_7,option_8,option_9,values[0],values[1],threshold,int(DDM_result*100)]
         a_series = pd.Series(to_append, index = st.session_state.df.columns)
  
-        st.session_state.df = st.session_state.df.append(a_series, ignore_index=True)
+        st.session_state.df = pd.concat([st.session_state.df,a_series],ignore_index=True)
               
 st.sidebar.markdown('## About DDMSim')
 
